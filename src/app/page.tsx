@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Heart, Star, Sparkle, Music, Camera } from 'lucide-react';
 import Webcam from "react-webcam";
 import html2canvas from "html2canvas";
-import CaptureNodeScreenshot from "react-capture-node-screenshot";
+
 const GiftIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -149,8 +149,7 @@ const ValentineCard = () => {
   const clone = cardRef.current.cloneNode(true) as HTMLElement;
   const computedStyles = window.getComputedStyle(cardRef.current);
 
-  // take screenshot of the card
-  const html2canvas = require("html2canvas");
+
   clone.style.position = "absolute";
   clone.style.left = "-9999px";
   clone.style.top = "0";
