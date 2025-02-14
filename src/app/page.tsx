@@ -34,7 +34,7 @@ const ValentineCard = () => {
     size: number;
     rotation: number;
   }
-  const WebcamComponent = () => <Webcam />;
+
 
   const [hearts, setHearts] = useState<Heart[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -141,57 +141,57 @@ const ValentineCard = () => {
     };
     setHearts(prev => [...prev, newHeart]);
   };
- // Function to copy styles & save card as an image with Tailwind applied
- const saveCardAsImage = async () => {
-  if (!cardRef.current) return;
+  // Function to copy styles & save card as an image with Tailwind applied
+  const saveCardAsImage = async () => {
+    if (!cardRef.current) return;
 
-  // Clone the element & apply computed styles
-  const clone = cardRef.current.cloneNode(true) as HTMLElement;
-  const computedStyles = window.getComputedStyle(cardRef.current);
-
-
-  clone.style.position = "absolute";
-  clone.style.left = "-9999px";
-  clone.style.top = "0";
-  clone.style.width = computedStyles.width;
-  clone.style.height = computedStyles.height;
-  clone.style.padding = computedStyles.padding;
-  clone.style.margin = computedStyles.margin;
-  clone.style.border = computedStyles.border;
-  clone.style.backgroundColor = "#F7CFD8"
-  clone.style.fontFamily = computedStyles.fontFamily;
-  clone.style.fontSize = computedStyles.fontSize;
-  clone.style.color = computedStyles.color;
-  clone.style.textAlign = computedStyles.textAlign;
-  clone.style.lineHeight = computedStyles.lineHeight;
-  clone.style.letterSpacing = computedStyles.letterSpacing;
-  clone.style.boxShadow = computedStyles.boxShadow;
-  clone.style.borderRadius = computedStyles.borderRadius;
-  clone.style.zIndex = "9999";
-  clone.style.overflow = "hidden";
+    // Clone the element & apply computed styles
+    const clone = cardRef.current.cloneNode(true) as HTMLElement;
+    const computedStyles = window.getComputedStyle(cardRef.current);
 
 
-  document.body.appendChild(clone); // Append temporarily for styling
+    clone.style.position = "absolute";
+    clone.style.left = "-9999px";
+    clone.style.top = "0";
+    clone.style.width = computedStyles.width;
+    clone.style.height = computedStyles.height;
+    clone.style.padding = computedStyles.padding;
+    clone.style.margin = computedStyles.margin;
+    clone.style.border = computedStyles.border;
+    clone.style.backgroundColor = "#F7CFD8"
+    clone.style.fontFamily = computedStyles.fontFamily;
+    clone.style.fontSize = computedStyles.fontSize;
+    clone.style.color = computedStyles.color;
+    clone.style.textAlign = computedStyles.textAlign;
+    clone.style.lineHeight = computedStyles.lineHeight;
+    clone.style.letterSpacing = computedStyles.letterSpacing;
+    clone.style.boxShadow = computedStyles.boxShadow;
+    clone.style.borderRadius = computedStyles.borderRadius;
+    clone.style.zIndex = "9999";
+    clone.style.overflow = "hidden";
 
-  const canvas = await html2canvas(clone, {
-    scale: 2,
-    useCORS: true,
-    backgroundColor: null,
-  });
 
-  document.body.removeChild(clone); // Remove clone after capture
+    document.body.appendChild(clone); // Append temporarily for styling
 
-  // Convert to PNG & Download
-  const image = canvas.toDataURL("image/png");
-  const link = document.createElement("a");
-  link.href = image;
-  link.download = "valentine_card.png";
-  link.click();
-};
+    const canvas = await html2canvas(clone, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: null,
+    });
+
+    document.body.removeChild(clone); // Remove clone after capture
+
+    // Convert to PNG & Download
+    const image = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "valentine_card.png";
+    link.click();
+  };
 
 
-  const toggleGift =() => {
- 
+  const toggleGift = () => {
+
     setShowGift(!showGift);
   };
 
@@ -232,8 +232,8 @@ const ValentineCard = () => {
         ))}
 
         {/* Card content */}
-        
-        <div  ref={cardRef}  className="absolute inset-0 flex flex-col h-full items-center justify-center p-6 text-center">
+
+        <div ref={cardRef} className="absolute inset-0 flex flex-col h-full items-center justify-center p-6 text-center">
           {!isOpen ? (
             <div className="space-y-4 animate-pulse">
               <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-pink-300">
@@ -302,7 +302,7 @@ const ValentineCard = () => {
                         setImageSrc(capturedImage);
                         setShowWebcam(false);
 
-                        
+
                       } else {
                         setShowWebcam(true);
                       }
@@ -315,7 +315,7 @@ const ValentineCard = () => {
                   {/* Gift button */}
                   <button
                     className={`p-3 rounded-full transition-all duration-300 ${showGift ? 'bg-pink-400 text-white' : 'bg-pink-100 hover:bg-pink-200'}`}
-                    onClick={  ()=>{
+                    onClick={() => {
                       toggleGift();
                       saveCardAsImage();
                     }
