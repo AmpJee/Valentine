@@ -99,10 +99,10 @@ const ValentineCard = () => {
         audioRef.current.loop = true;
       }
     } else {
-      audioRef.current?.pause();
+      audioRef?.current?.pause();
     }
     return () => {
-      audioRef.current?.pause();
+      audioRef?.current?.pause();
     };
   }, [isPlaying, audioRef]);
 
@@ -241,17 +241,19 @@ const ValentineCard = () => {
                 />
               )}
 
-              <h1 className="text-3xl font-bold text-red-600 font-cursive">Happy Valentine&apos; Day!</h1>
+              <h1 className="text-3xl font-bold text-red-600 font-cursive">Happy Valentine&apos; Day, Pre!</h1>
               <div className="space-y-4 text-gray-700">
           
                 <p className="text-2xl font-bold text-red-500 mt-4">
-                  To my dearest love, you make every day feel like Valentines Day! ✨
+                  To my man, you make every day feel like Valentines Day! ✨
                 </p>
                 <p className="text-lg">
                   Your smile brightens my world, your love fills my heart, and your presence makes life beautiful.
+                  ขอบคุณที่ดูแลเค้าตลอดนะ ดีใจมากๆที่มีคุณเข้ามาในชีวิต เค้ามีความสุขมากๆเลยที่มีคุณอยู่ข้างๆ
+                  เค้าอยู่ข้างๆคุณเสมอ อยู่ด้วยกันไปนานๆนะคะะะ
                 </p>
                 <p className="text-2xl font-bold text-red-500 mt-4">
-                  I Love You Forever! ❤️
+                  Love You as Always! ❤️ AMP
                 </p>
               </div>
 
