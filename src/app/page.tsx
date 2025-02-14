@@ -38,11 +38,9 @@ const ValentineCard = () => {
 
   const [hearts, setHearts] = useState<Heart[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showGift, setShowGift] = useState(false);
 
-  // Create audio element
-  const [audio] = useState(new Audio('/Violette Wautier - ENVY (Official Lyric Video).mp3'));
+  
   const videoConstraints = {
     width: 120,
     height: 120,
@@ -56,15 +54,7 @@ const ValentineCard = () => {
 
   const [imageSrc, setImageSrc] = React.useState<string | null>(null);
 
-  const capture = React.useCallback(
-    () => {
-      const imageSrc = webcamRef.current ? webcamRef.current.getScreenshot() : null;
-      console.log(imageSrc);
-      setImageSrc(imageSrc);
 
-    },
-    [webcamRef]
-  );
   useEffect(() => {
     // Initialize the audio only on the client side
     if (typeof Audio !== 'undefined') {
@@ -89,23 +79,7 @@ const ValentineCard = () => {
     }
   }, [isOpen]);
 
-  // Capture an image from the video feed
-  const captureImage = () => {
-    if (videoRef.current) {
-      const canvas = document.createElement('canvas');
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
-      const context = canvas.getContext('2d');
-      if (context) {
-        context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-        const imageDataUrl = canvas.toDataURL('image/jpeg');
-        setSelectedImage(imageDataUrl);
-      }
-      // Optionally, stop the stream if you no longer need the live preview:
-      const stream = videoRef.current.srcObject as MediaStream;
-      stream.getTracks().forEach(track => track.stop());
-    }
-  };
+
 
   useEffect(() => {
     if (isOpen) {
@@ -119,17 +93,18 @@ const ValentineCard = () => {
   // Handle music playback
   useEffect(() => {
     if (isPlaying) {
-      audio.currentTime = 8;
-      audio.play();
-
-      audio.loop = true;
+      if (audioRef.current) {
+        audioRef.current.currentTime = 8;
+        audioRef.current.play();
+        audioRef.current.loop = true;
+      }
     } else {
-      audio.pause();
+      audioRef.current?.pause();
     }
     return () => {
-      audio.pause();
+      audioRef.current?.pause();
     };
-  }, [isPlaying, audio]);
+  }, [isPlaying, audioRef]);
 
   const addHeart = () => {
     const newHeart = {
@@ -266,10 +241,11 @@ const ValentineCard = () => {
                 />
               )}
 
-              <h1 className="text-3xl font-bold text-red-600 font-cursive">Happy Valentine's Day!</h1>
+              <h1 className="text-3xl font-bold text-red-600 font-cursive">Happy Valentine&apos; Day!</h1>
               <div className="space-y-4 text-gray-700">
-                <p className="text-xl">
-                  To my dearest love, you make every day feel like Valentine's Day! ✨
+          
+                <p className="text-2xl font-bold text-red-500 mt-4">
+                  To my dearest love, you make every day feel like Valentines Day! ✨
                 </p>
                 <p className="text-lg">
                   Your smile brightens my world, your love fills my heart, and your presence makes life beautiful.
